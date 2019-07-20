@@ -293,7 +293,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://winnerwbx.github.io/2019/07/20/ARTS挑战-打卡WEEK-1/">
+    <link itemprop="mainEntityOfPage" href="https://winnerwbx.github.io/2019/07/20/ARTS-WEEK-1-Tip/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Andy Wang">
@@ -313,7 +313,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/07/20/ARTS挑战-打卡WEEK-1/" class="post-title-link" itemprop="url">ARTS挑战-打卡WEEK 1</a>
+                <a href="/2019/07/20/ARTS-WEEK-1-Tip/" class="post-title-link" itemprop="url">ARTS-WEEK-1-Tip</a>
               
             
           </h1>
@@ -338,7 +338,188 @@
                 
               
 
-              <time title="Created: 2019-07-20 18:46:41 / Modified: 21:01:49" itemprop="dateCreated datePublished" datetime="2019-07-20T18:46:41+08:00">2019-07-20</time>
+              <time title="Created: 2019-07-20 23:26:32" itemprop="dateCreated datePublished" datetime="2019-07-20T23:26:32+08:00">2019-07-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-21 00:11:59" itemprop="dateModified" datetime="2019-07-21T00:11:59+08:00">2019-07-21</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Tip"><a href="#Tip" class="headerlink" title="Tip"></a>Tip</h2><h3 id="Git使用小技巧：如何忽略已经提交的文件"><a href="#Git使用小技巧：如何忽略已经提交的文件" class="headerlink" title="Git使用小技巧：如何忽略已经提交的文件"></a>Git使用小技巧：如何忽略已经提交的文件</h3><p>使用Git的时候，经常遇到这样的问题，就是不小心提交了不想要的文件，想要让Git忽略这些文件</p>
+<hr>
+<p>我们知道，git有一个 <strong>.gitignore</strong> 文件，加入到 <strong>.gitignore</strong> 的文件，就不会被git跟踪。</p>
+<p>比如我们在干净的仓库新建一个 <code>test.txt</code> 的文件，执行<code>git status</code> ，在Untracked files里会看到有 <code>test.txt</code> 文件待提交</p>
+<p>此时如果创建<code>.gitignore</code>文件，并把<code>test.txt</code>加入到 <strong>.gitignore</strong> 中，再执行<code>git status</code>，就看不到该文件在未跟踪区了，也就是被git忽略掉了。</p>
+<hr>
+<p>但是，如果我们在创建<code>test.txt</code> 的文件后，先输入了 <code>git add test.txt</code> ，再把它加入到<code>.gitignore</code>文件中，会发生什么事呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Changes to be committed:</span><br><span class="line">  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span><br><span class="line"></span><br><span class="line">        new file:   test.txt</span><br><span class="line"></span><br><span class="line">Changes not staged for commit:</span><br><span class="line">  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span><br><span class="line">  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span><br><span class="line"></span><br><span class="line">        modified:   .gitignore</span><br></pre></td></tr></table></figure>
+<p>看到了么？git并没有把这个文件忽略，仍然在暂存区。</p>
+<p>####为什么呢？</p>
+<p>因为<code>.gitignore</code>文件仅仅是对<strong>未被git跟踪过的</strong>文件生效，一旦文件被git跟踪记录过，就不好使了。</p>
+<p>####该怎么办？</p>
+<p>执行<code>git rm --cached test.txt</code>（如果要忽略的是文件夹，则要加<code>-r</code>参数）, 或者<code>git reset HEAD text.txt</code>，将该文件从暂存区移除（仅仅是从git的暂存区移除，不是从本地移除），这样，再执行<code>git status</code>，就看不到该文件在未跟踪区了，也就是被git忽略掉了。</p>
+<hr>
+<p>更进一步，假如我们已经把想要忽略的文件已经commit甚至push了，该怎么办呢？</p>
+<p>别着急，也是有办法的</p>
+<ol>
+<li>我们先把要忽略的文件加入到<code>.gitignore</code>文件中</li>
+<li><p>然后执行<code>git rm --cached [要忽略的文件]</code>（如<code>git rm --cached test.txt</code>或者<code>git rm -r --cached target/*</code>)</p>
+<p>此时看<code>git status</code>时，会是如下显示：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Changes to be committed:</span><br><span class="line">  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span><br><span class="line"></span><br><span class="line">        deleted:    test.txt</span><br><span class="line"></span><br><span class="line">Changes not staged for commit:</span><br><span class="line">  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span><br><span class="line">  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span><br><span class="line"></span><br><span class="line">        modified:   .gitignore</span><br></pre></td></tr></table></figure>
+<p> deleted表示会从git的库里删除</p>
+</li>
+<li>执行<code>git add .gitigonre</code>，把<code>.gitignore</code>文件也加入到暂存区</li>
+<li>提交代码<code>git commit -m &quot;some message&quot;</code>，这样，以后再有对该文件的改动，也不会被git进行追踪了</li>
+<li>执行<code>git push</code>，提交到远程版本库，确保其他人拉取代码后，这个文件也会被忽略到。</li>
+</ol>
+<p><strong>Bingo！大功告成~</strong></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://winnerwbx.github.io/2019/07/20/ARTS-WEEK-1-Algorithm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Andy Wang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy's Homepage">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/20/ARTS-WEEK-1-Algorithm/" class="post-title-link" itemprop="url">ARTS-WEEK 1-Algorithm</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-20 23:23:12 / Modified: 23:27:58" itemprop="dateCreated datePublished" datetime="2019-07-20T23:23:12+08:00">2019-07-20</time>
             
 
             
@@ -389,16 +570,28 @@
 <blockquote>
 <p>在这条路上，你会有一万个理由来让你应付交差，还会有十万个理由放弃，过去的几个群，能坚持下来的也就2%-4%的样子，所以，你们要做好挑战自己的艰难准备，有问题互相探讨，互相鼓励。</p>
 </blockquote>
-<p>我参与这个打卡挑战，首先是想通过持续的联系，提升自己的数据结构和算法基本攻，让自己的技术更加精进，也是希望希望能够看一下，自己能不能够坚持下来，培养自己持续记录、持续输出的好习惯</p>
+<p>我参与这个打卡挑战，首先是想通过持续的练习，提升自己的数据结构和算法基本功，让自己的技术更加精进，也是希望希望能够看一下，自己能不能够坚持下来，培养自己持续记录、持续输出的好习惯</p>
 <p>废话不多说，开始正题</p>
-<h2 id="1-Algorithm"><a href="#1-Algorithm" class="headerlink" title="1. Algorithm"></a>1. Algorithm</h2><p>LeetCode No. 905: Sort Array By Parity</p>
+<h2 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h2><p>LeetCode No. 905: Sort Array By Parity</p>
 <blockquote>
 <p>Given an array A of non-negative integers, return an array consisting of all the even elements of A, followed by all the odd elements of A.</p>
 </blockquote>
 <blockquote>
 <p> You may return any answer array that satisfies this condition.</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">  Example 1:</span><br><span class="line">  </span><br><span class="line">  Input: [3,1,2,4]</span><br><span class="line">  </span><br><span class="line">  Output: [2,4,3,1]</span><br><span class="line">  </span><br><span class="line">  The outputs [4,2,3,1], [2,4,1,3], and [4,2,1,3] would also be accepted. </span><br><span class="line">``` </span><br><span class="line">  </span><br><span class="line">Note:</span><br><span class="line"></span><br><span class="line">1. `1 &lt;= A.length &lt;= 5000`</span><br><span class="line">1. `2 &lt;= A[i] &lt;= 5000`</span><br><span class="line"></span><br><span class="line">翻译一下：分割一个整数数组，使得偶数在前奇数在后</span><br><span class="line"></span><br><span class="line">### 思路：</span><br><span class="line"></span><br><span class="line">#### 解法1 </span><br><span class="line"></span><br><span class="line">可以通过开辟一个新的数组B，从头遍历原数组，遇到偶数，从前往后放到数组B中，遇到奇数，从后往前放到数据B中。遍历结束得到新的数据就是结果。</span><br><span class="line"></span><br><span class="line">**时间复杂度:** 因为只遍历一遍，时间复杂度为O(N)</span><br><span class="line"></span><br><span class="line">**空间复杂度:** 需要新开辟一个数组，所以空间复杂度为O(N)</span><br><span class="line"></span><br><span class="line">实现如下：</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public int[] sortArrayByParity(int[] A) &#123;</span><br><span class="line">        int[] B = new int[A.length];</span><br><span class="line">        int j = 0, k = A.length - 1;</span><br><span class="line">        for (int i = 0; i &lt; A.length; i++) &#123;</span><br><span class="line">            if (A[i] % 2 == 0) &#123;</span><br><span class="line">                B[j] = A[i];</span><br><span class="line">                j++;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                B[k] = A[i];</span><br><span class="line">                k--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return B;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Example 1:</span><br><span class="line"></span><br><span class="line">Input: [3,1,2,4]</span><br><span class="line"></span><br><span class="line">Output: [2,4,3,1]</span><br><span class="line"></span><br><span class="line">The outputs [4,2,3,1], [2,4,1,3], and [4,2,1,3] would also be accepted.</span><br></pre></td></tr></table></figure>
+<p>Note:</p>
+<ol>
+<li><code>1 &lt;= A.length &lt;= 5000</code></li>
+<li><code>2 &lt;= A[i] &lt;= 5000</code></li>
+</ol>
+<p>翻译一下：分割一个整数数组，使得偶数在前奇数在后</p>
+<h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h4 id="解法1"><a href="#解法1" class="headerlink" title="解法1"></a>解法1</h4><p>可以通过开辟一个新的数组B，从头遍历原数组，遇到偶数，从前往后放到数组B中，遇到奇数，从后往前放到数据B中。</p>
+<p>遍历结束得到新的数据就是结果。</p>
+<p><strong>时间复杂度:</strong> 因为只遍历一遍，时间复杂度为O(N)</p>
+<p><strong>空间复杂度:</strong> 需要新开辟一个数组，所以空间复杂度为O(N)</p>
+<p>实现如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] sortArrayByParity(<span class="keyword">int</span>[] A) &#123;</span><br><span class="line">        <span class="keyword">int</span>[] B = <span class="keyword">new</span> <span class="keyword">int</span>[A.length];</span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">0</span>, k = A.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; A.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (A[i] % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">                B[j] = A[i];</span><br><span class="line">                j++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                B[k] = A[i];</span><br><span class="line">                k--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> B;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="解法2"><a href="#解法2" class="headerlink" title="解法2"></a>解法2</h4><p>解法1需要新开辟一个数组，空间复杂度为O(N)，如果想减少空间复杂度，实现原地排序，那么可以用如下方法：</p>
 <p>设置两个指针j和k，j从前往后遍历，k从后往前遍历</p>
 <p>当且仅当j遇到的奇数，且k遇到的是偶数时，交换j、k所在位置的元素</p>
@@ -408,6 +601,343 @@
 <p><strong>空间复杂度:</strong> 原地排序，空间复杂度为O(1)</p>
 <p>实现如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] sortArrayByParity(<span class="keyword">int</span>[] A) &#123;</span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">0</span>, k = A.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (j &lt; k) &#123;</span><br><span class="line">            <span class="keyword">if</span> (A[j] % <span class="number">2</span> == <span class="number">1</span> &amp;&amp; A[k] % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">                swap(A, j, k);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (A[j] % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (A[k] % <span class="number">2</span> == <span class="number">1</span>) &#123;</span><br><span class="line">                k--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> A;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://winnerwbx.github.io/2019/07/20/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Andy Wang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy's Homepage">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/20/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-20 21:04:59" itemprop="dateCreated datePublished" datetime="2019-07-20T21:04:59+08:00">2019-07-20</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://winnerwbx.github.io/2019/07/20/ARTS-WEEK-1-Review/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Andy Wang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy's Homepage">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/20/ARTS-WEEK-1-Review/" class="post-title-link" itemprop="url">ARTS-WEEK-1-Review</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-20 18:46:41 / Modified: 23:27:58" itemprop="dateCreated datePublished" datetime="2019-07-20T18:46:41+08:00">2019-07-20</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h2><p><a href="https://medium.com/developingnodes/what-it-means-to-be-cloud-native-approach-the-cncf-way-9e8ab99d4923" target="_blank" rel="noopener">What it means to be Cloud Native approach — the CNCF way</a></p>
+<p>本文是实现云原生的科普文，主要介绍了云原生、云原生计算基金会（CNCF，Cloud Native Computing Foundation），实现云原生的路线图，以及现在有哪些云原生的开源产品。</p>
+<h3 id="什么是云原生和CNCF？"><a href="#什么是云原生和CNCF？" class="headerlink" title="什么是云原生和CNCF？"></a>什么是云原生和CNCF？</h3><p>云原生是指充分利用云计算技术进行服务部署和运行的一种实现手段。</p>
+<p>云原生的架构能够充分利用云计算的技术以实现按需部署、弹性扩缩容、持续集成和交付，并能较好地节约服务成本。</p>
+<p>有了容器技术才有云原生，Google的Kubernetes项目目前已经成为容器编排界的事实标准，2015年，Google把Kubernetes贡献给了CNCF，标志着CNCF的诞生。</p>
+<p>CNCF认为云原生具有如下三个特点：</p>
+<ol>
+<li>使用容器技术、微服务和声明式API</li>
+<li>运行在动态环境上（云基础设施）</li>
+<li>服务是可伸缩可扩展的（Scalable）</li>
+</ol>
+<h3 id="实现云原生的路线图"><a href="#实现云原生的路线图" class="headerlink" title="实现云原生的路线图"></a>实现云原生的路线图</h3><p>根据业务需求，有很多手段可以实现云原生，CNCF给出了一些建议的工具和最佳实践，以实现云原生。</p>
+<p>具体分以下几点：</p>
+<ol>
+<li><p>容器化</p>
+<p> 容器技术把服务所需要的代码和所有依赖打包到container中，几乎运行服务所需要的一切都可以打包到容器里。</p>
+<p> 这里最常用的就是Docker了。</p>
+<p> 有了Docker的container，就可以实现按需部署和扩缩容了。</p>
+</li>
+<li><p>CI/CD（持续集成、持续部署）</p>
+<p> CI/CD是指对代码的改动提交到代码仓库（如git等），自动执行构建、打包、生成container、部署的一个完整的自动化流程。支持自动化发布、回滚和测试等。</p>
+<p> 常用的工具如Jenkins等。</p>
+</li>
+<li><p>容器编排</p>
+<p> 容器编排是指管理诸多container的生命周期。使用容器便来来控制和自动化一些任务。</p>
+<p> 使用最广泛的当然就是Kubernetes了</p>
+</li>
+<li><p>监控和分析</p>
+<p> Kubernetes不提供原生的日志解决方案，但是有许多可用的工具可以实现对服务的监控、日志收集以及链路追踪。</p>
+<p> 如：Prometheus（用于监控）、fluentd（用于日志）以及Jaeger（用于链路追踪）等。</p>
+</li>
+<li><p>Service Mesh（服务网格）</p>
+<p> Service Mesh是将服务注册发现、健康管理、路由等功能从服务本身实现中抽离出来，提供一个统一的能力。</p>
+<p> 服务无需关心这些细节，只需与本地的client进行通信，由Service Mesh的client进行服务注册发现、健康管理等。</p>
+<p> 常用工具有：Istio、CoreDNS、Envoy和Linkerd</p>
+</li>
+<li><p>分布式数据库</p>
+<p> 云原生也提供了分布式数据库的一些方案，如使用Vitess、Rook等。</p>
+</li>
+<li><p>服务调用</p>
+<p> 除了传统的JSON-REST方式，也可以使用gRPC、NATS等。</p>
+</li>
+<li><p>容器注册和运行</p>
+<p> 容器注册中心用于容器image的管理、权限控制等，如Docker hub、Nexus registry等</p>
+<p> containerd是容器的运行时，管理了单机上容器的生命周期。</p>
+</li>
+</ol>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>云原生从一开始就基于为运行在云计算基础设施上的服务提供支持。</p>
+<p>带来了哪些好处？</p>
+<p>服务的高可用、弹性扩缩容、快速响应能力，自治能力和故障恢复能力，也许这就是它越来越流行的原因吧。</p>
 
           
         
@@ -526,7 +1056,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-01-15 15:22:19" itemprop="dateModified" datetime="2019-01-15T15:22:19+08:00">2019-01-15</time>
+                <time title="Modified: 2019-07-20 21:04:59" itemprop="dateModified" datetime="2019-07-20T21:04:59+08:00">2019-07-20</time>
               
             
           </span>
@@ -611,152 +1141,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://winnerwbx.github.io/2018/12/29/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Andy Wang">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy's Homepage">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/29/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-29 16:33:43" itemprop="dateCreated datePublished" datetime="2018-12-29T16:33:43+08:00">2018-12-29</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -800,7 +1184,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -817,7 +1201,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">1</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
