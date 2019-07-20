@@ -36,11 +36,11 @@ Changes not staged for commit:
 
 看到了么？git并没有把这个文件忽略，仍然在暂存区。
 
-####为什么呢？
+#### 为什么呢？
 
 因为`.gitignore`文件仅仅是对**未被git跟踪过的**文件生效，一旦文件被git跟踪记录过，就不好使了。
 
-####该怎么办？
+#### 该怎么办？
 
 执行`git rm --cached test.txt`（如果要忽略的是文件夹，则要加`-r`参数）, 或者`git reset HEAD text.txt`，将该文件从暂存区移除（仅仅是从git的暂存区移除，不是从本地移除），这样，再执行`git status`，就看不到该文件在未跟踪区了，也就是被git忽略掉了。
 
