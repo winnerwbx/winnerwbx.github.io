@@ -2,6 +2,9 @@
 title: ARTS-WEEK-1-Review
 date: 2019-07-20 18:46:41
 tags: ARTS Review
+categories:
+- ARTS
+- WEEK1
 ---
 ## Review
 

@@ -2,6 +2,9 @@
 title: ARTS-WEEK-1-Tip
 date: 2019-07-20 23:26:32
 tags: ARTS Tip
+categories:
+- ARTS
+- WEEK1
 ---
 ## Tip
 
@@ -69,6 +72,6 @@ Changes not staged for commit:
     deleted表示会从git的库里删除
 3. 执行`git add .gitigonre`，把`.gitignore`文件也加入到暂存区
 4. 提交代码`git commit -m "some message"`，这样，以后再有对该文件的改动，也不会被git进行追踪了
-5. 执行`git push`，提交到远程版本库，确保其他人拉取代码后，这个文件也会被忽略到。
+5. 执行`git push`，提交到远程版本库，确保其他人拉取代码后，这个文件也会被忽略掉。
 
 **Bingo！大功告成~**
