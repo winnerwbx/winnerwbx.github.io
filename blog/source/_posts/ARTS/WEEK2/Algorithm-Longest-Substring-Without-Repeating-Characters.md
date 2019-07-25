@@ -1,5 +1,5 @@
 ---
-title: Algorithm-Longest Substring Without Repeating Characters
+title: Algorithm-Longest-Substring-Without-Repeating-Characters
 date: 2019-07-20 23:23:12
 tags: ARTS Algorithm
 categories:
