@@ -497,6 +497,219 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://winnerwbx.github.io/2019/07/20/ARTS/WEEK2/Algorithm-Longest-Substring-Without-Repeating-Characters/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Andy Wang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy's Homepage">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/20/ARTS/WEEK2/Algorithm-Longest-Substring-Without-Repeating-Characters/" class="post-title-link" itemprop="url">Algorithm-Longest-Substring-Without-Repeating-Characters</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-20 23:23:12" itemprop="dateCreated datePublished" datetime="2019-07-20T23:23:12+08:00">2019-07-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-25 21:21:26" itemprop="dateModified" datetime="2019-07-25T21:21:26+08:00">2019-07-25</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ARTS/" itemprop="url" rel="index"><span itemprop="name">ARTS</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ARTS/WEEK2/" itemprop="url" rel="index"><span itemprop="name">WEEK2</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h1><h2 id="LeetCode-No-3-Longest-Substring-Without-Repeating-Characters"><a href="#LeetCode-No-3-Longest-Substring-Without-Repeating-Characters" class="headerlink" title="LeetCode No 3. Longest Substring Without Repeating Characters"></a>LeetCode No 3. Longest Substring Without Repeating Characters</h2><blockquote>
+<p>Given a string, find the length of the longest substring without repeating characters.</p>
+</blockquote>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;abcabcbb&quot;</span><br><span class="line">Output: 3 </span><br><span class="line">Explanation: The answer is &quot;abc&quot;, with the length of 3.</span><br></pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;bbbbb&quot;</span><br><span class="line">Output: 1</span><br><span class="line">Explanation: The answer is &quot;b&quot;, with the length of 1.</span><br></pre></td></tr></table></figure>
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;pwwkew&quot;</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: The answer is &quot;wke&quot;, with the length of 3. </span><br><span class="line">             Note that the answer must be a substring, &quot;pwke&quot; is a subsequence and not a substring.</span><br></pre></td></tr></table></figure>
+<p>翻译一下：给定一个字符串，找出其中不含有重复字符的<strong>最长子串</strong>（要求连续）的长度。</p>
+<hr>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><h4 id="1-Brute-force-暴力求解"><a href="#1-Brute-force-暴力求解" class="headerlink" title="1. Brute-force 暴力求解"></a>1. Brute-force 暴力求解</h4><p>获取该字符串的所有子串，然后对每一个子串，判断有没有重复字符</p>
+<p>假设字符串总长度为N，所有的子串长度从1~N</p>
+<p>从头开始遍历字符串，对于第i个字符（i从0开始），以它开头的子串有N-i个</p>
+<p>对每一个子串，判断是否有重复字符，最坏情况需要遍历N次</p>
+<p>所以该方法的时间复杂度为O(N^3)</p>
+<p>具体实现如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">char</span>[] chars = s.toCharArray();</span><br><span class="line">        <span class="keyword">int</span> maxLength = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 1. 从头遍历字符串</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; chars.length; i++) &#123;</span><br><span class="line">            <span class="comment">//2. 找到第i个字符开头的所有子串（包括左不包括右）</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = chars.length; j &gt;= i + <span class="number">1</span>; j--) &#123;</span><br><span class="line">                <span class="keyword">int</span> subStringLength = findSubStringLength(chars, i, j);</span><br><span class="line">                maxLength = Math.max(maxLength, subStringLength);</span><br><span class="line">                <span class="comment">// 剪枝：当子串长度与本身长度相等时，就不再继续往下找了</span></span><br><span class="line">                <span class="keyword">if</span> (subStringLength == j - i) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 剪枝：同理当某个字符开头的长度与本身长度相等时，就不再继续往下找了</span></span><br><span class="line">            <span class="keyword">if</span> (maxLength == chars.length - i) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxLength;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 对从left到right的子串，找到从左到右的最长无重复字符个数</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">findSubStringLength</span><span class="params">(<span class="keyword">char</span>[] chars, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        Set&lt;Character&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span> length = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = left; i &lt; right; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (set.contains(chars[i])) &#123;</span><br><span class="line">                <span class="keyword">return</span> length;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                set.add(chars[i]);</span><br><span class="line">                length++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> length;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这种暴力求解的方法只是提供一个思路，如果你在LeetCode里提交的话，肯定会因为超时报异常。当然在面试里可以提一下，为了体现你的思考也是好的</p>
+<h4 id="2-滑动窗口"><a href="#2-滑动窗口" class="headerlink" title="2. 滑动窗口"></a>2. 滑动窗口</h4><p>聪明的你一定想到肯定有简化的算法。官方给出的方法叫做<strong>滑动窗口</strong>，通俗地解释下：</p>
+<p>给出两个指针left和right，left和right之间所谓<strong>滑动窗口</strong>，从第一个字符开始，遇到无重复的字符，向右扩展窗口，遇到重复的字符，缩小左边窗口，从头滑到尾，窗口的最大长度就是问题的解。</p>
+<p>那么问题来了，如何判断窗口中是否有重复元素，以及重复元素到底在哪儿呢？</p>
+<p>使用散列表（HashMap）是一个比较好的方案，key存储字符，value存储字符在字符串数组中的位置。</p>
+<p>从头遍历字符串数组，假如没有重复，就往HashMap里put这个字符以及它的位置。</p>
+<p>如果有重复字符怎么办？</p>
+<p>获取到重复字符之前的位置了，我要不要把这个字符以及之前的元素都从Map里删去呢？如果不删去，那么后面再遇到之前有的重复的元素怎么办？</p>
+<p>比如abcdba这个字符串，找到b时重复时要不要把abcd都从map里去掉呢？</p>
+<p><strong>其实并不需要的。</strong>这个问题一开始也困扰了我好久，但是仔细想想，有一个left指针没有用到啊！！！</p>
+<p>我只需要把left指针往后就行了，指到之前那个重复字符的后一个位置，然后更新这个重复元素在map中的值。</p>
+<p>这样的话还有一个问题，重复元素之前的字符没有从map里去掉，后面再遇到怎么办？虽然在map里有值，但是在当前窗口中并没有重复呢！！！</p>
+<p><code>划重点！这个时候，我们的left指针实际上是比从map里获取到的重复元素的index要大！！！</code></p>
+<p>所以这种情况，我们不需要动left的位置。只需要更新这个字符在map里的value就可以。这样就确保了滑动窗口里永远没有重复元素。</p>
+<p>好嘞，shut up and show me the code!</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">char</span>[] chars = s.toCharArray();</span><br><span class="line">            Map&lt;Character, Integer&gt; charIndexMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">            <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">int</span> maxLength = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> right = <span class="number">0</span>; right &lt; chars.length; right++) &#123;</span><br><span class="line">                <span class="keyword">char</span> c = chars[right];</span><br><span class="line">                <span class="keyword">if</span> (!charIndexMap.containsKey(c)) &#123;</span><br><span class="line">                    charIndexMap.put(c, right);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">int</span> indexOfRepeatChar = charIndexMap.get(c);</span><br><span class="line">                    left = Math.max(left, indexOfRepeatChar + <span class="number">1</span>);</span><br><span class="line">                    charIndexMap.put(c, right);</span><br><span class="line">                &#125;</span><br><span class="line">                maxLength = Math.max(maxLength, right - left + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> maxLength;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码如果看起来有困难的话，结合上面讲解一起食用更好哦！</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://winnerwbx.github.io/2019/07/20/ARTS/WEEK1/ARTS-WEEK-1-Algorithm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -661,219 +874,6 @@
 <p><strong>空间复杂度:</strong> 原地排序，空间复杂度为O(1)</p>
 <p>实现如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] sortArrayByParity(<span class="keyword">int</span>[] A) &#123;</span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">0</span>, k = A.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (j &lt; k) &#123;</span><br><span class="line">            <span class="keyword">if</span> (A[j] % <span class="number">2</span> == <span class="number">1</span> &amp;&amp; A[k] % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">                swap(A, j, k);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (A[j] % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (A[k] % <span class="number">2</span> == <span class="number">1</span>) &#123;</span><br><span class="line">                k--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> A;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://winnerwbx.github.io/2019/07/20/ARTS/WEEK2/Algorithm-Longest-Substring-Without-Repeating-Characters/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Andy Wang">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy's Homepage">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/20/ARTS/WEEK2/Algorithm-Longest-Substring-Without-Repeating-Characters/" class="post-title-link" itemprop="url">Algorithm-Longest Substring Without Repeating Characters</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-07-20 23:23:12" itemprop="dateCreated datePublished" datetime="2019-07-20T23:23:12+08:00">2019-07-20</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-07-25 21:16:59" itemprop="dateModified" datetime="2019-07-25T21:16:59+08:00">2019-07-25</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ARTS/" itemprop="url" rel="index"><span itemprop="name">ARTS</span></a></span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ARTS/WEEK2/" itemprop="url" rel="index"><span itemprop="name">WEEK2</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h1><h2 id="LeetCode-No-3-Longest-Substring-Without-Repeating-Characters"><a href="#LeetCode-No-3-Longest-Substring-Without-Repeating-Characters" class="headerlink" title="LeetCode No 3. Longest Substring Without Repeating Characters"></a>LeetCode No 3. Longest Substring Without Repeating Characters</h2><blockquote>
-<p>Given a string, find the length of the longest substring without repeating characters.</p>
-</blockquote>
-<p><strong>Example 1:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;abcabcbb&quot;</span><br><span class="line">Output: 3 </span><br><span class="line">Explanation: The answer is &quot;abc&quot;, with the length of 3.</span><br></pre></td></tr></table></figure>
-<p><strong>Example 2:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;bbbbb&quot;</span><br><span class="line">Output: 1</span><br><span class="line">Explanation: The answer is &quot;b&quot;, with the length of 1.</span><br></pre></td></tr></table></figure>
-<p><strong>Example 3:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;pwwkew&quot;</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: The answer is &quot;wke&quot;, with the length of 3. </span><br><span class="line">             Note that the answer must be a substring, &quot;pwke&quot; is a subsequence and not a substring.</span><br></pre></td></tr></table></figure>
-<p>翻译一下：给定一个字符串，找出其中不含有重复字符的<strong>最长子串</strong>（要求连续）的长度。</p>
-<hr>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><h4 id="1-Brute-force-暴力求解"><a href="#1-Brute-force-暴力求解" class="headerlink" title="1. Brute-force 暴力求解"></a>1. Brute-force 暴力求解</h4><p>获取该字符串的所有子串，然后对每一个子串，判断有没有重复字符</p>
-<p>假设字符串总长度为N，所有的子串长度从1~N</p>
-<p>从头开始遍历字符串，对于第i个字符（i从0开始），以它开头的子串有N-i个</p>
-<p>对每一个子串，判断是否有重复字符，最坏情况需要遍历N次</p>
-<p>所以该方法的时间复杂度为O(N^3)</p>
-<p>具体实现如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">char</span>[] chars = s.toCharArray();</span><br><span class="line">        <span class="keyword">int</span> maxLength = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 1. 从头遍历字符串</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; chars.length; i++) &#123;</span><br><span class="line">            <span class="comment">//2. 找到第i个字符开头的所有子串（包括左不包括右）</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = chars.length; j &gt;= i + <span class="number">1</span>; j--) &#123;</span><br><span class="line">                <span class="keyword">int</span> subStringLength = findSubStringLength(chars, i, j);</span><br><span class="line">                maxLength = Math.max(maxLength, subStringLength);</span><br><span class="line">                <span class="comment">// 剪枝：当子串长度与本身长度相等时，就不再继续往下找了</span></span><br><span class="line">                <span class="keyword">if</span> (subStringLength == j - i) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 剪枝：同理当某个字符开头的长度与本身长度相等时，就不再继续往下找了</span></span><br><span class="line">            <span class="keyword">if</span> (maxLength == chars.length - i) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxLength;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 对从left到right的子串，找到从左到右的最长无重复字符个数</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">findSubStringLength</span><span class="params">(<span class="keyword">char</span>[] chars, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        Set&lt;Character&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span> length = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = left; i &lt; right; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (set.contains(chars[i])) &#123;</span><br><span class="line">                <span class="keyword">return</span> length;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                set.add(chars[i]);</span><br><span class="line">                length++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> length;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这种暴力求解的方法只是提供一个思路，如果你在LeetCode里提交的话，肯定会因为超时报异常。当然在面试里可以提一下，为了体现你的思考也是好的</p>
-<h4 id="2-滑动窗口"><a href="#2-滑动窗口" class="headerlink" title="2. 滑动窗口"></a>2. 滑动窗口</h4><p>聪明的你一定想到肯定有简化的算法。官方给出的方法叫做<strong>滑动窗口</strong>，通俗地解释下：</p>
-<p>给出两个指针left和right，left和right之间所谓<strong>滑动窗口</strong>，从第一个字符开始，遇到无重复的字符，向右扩展窗口，遇到重复的字符，缩小左边窗口，从头滑到尾，窗口的最大长度就是问题的解。</p>
-<p>那么问题来了，如何判断窗口中是否有重复元素，以及重复元素到底在哪儿呢？</p>
-<p>使用散列表（HashMap）是一个比较好的方案，key存储字符，value存储字符在字符串数组中的位置。</p>
-<p>从头遍历字符串数组，假如没有重复，就往HashMap里put这个字符以及它的位置。</p>
-<p>如果有重复字符怎么办？</p>
-<p>获取到重复字符之前的位置了，我要不要把这个字符以及之前的元素都从Map里删去呢？如果不删去，那么后面再遇到之前有的重复的元素怎么办？</p>
-<p>比如abcdba这个字符串，找到b时重复时要不要把abcd都从map里去掉呢？</p>
-<p><strong>其实并不需要的。</strong>这个问题一开始也困扰了我好久，但是仔细想想，有一个left指针没有用到啊！！！</p>
-<p>我只需要把left指针往后就行了，指到之前那个重复字符的后一个位置，然后更新这个重复元素在map中的值。</p>
-<p>这样的话还有一个问题，重复元素之前的字符没有从map里去掉，后面再遇到怎么办？虽然在map里有值，但是在当前窗口中并没有重复呢！！！</p>
-<p><code>划重点！这个时候，我们的left指针实际上是比从map里获取到的重复元素的index要大！！！</code></p>
-<p>所以这种情况，我们不需要动left的位置。只需要更新这个字符在map里的value就可以。这样就确保了滑动窗口里永远没有重复元素。</p>
-<p>好嘞，shut up and show me the code!</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">char</span>[] chars = s.toCharArray();</span><br><span class="line">            Map&lt;Character, Integer&gt; charIndexMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">            <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">int</span> maxLength = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> right = <span class="number">0</span>; right &lt; chars.length; right++) &#123;</span><br><span class="line">                <span class="keyword">char</span> c = chars[right];</span><br><span class="line">                <span class="keyword">if</span> (!charIndexMap.containsKey(c)) &#123;</span><br><span class="line">                    charIndexMap.put(c, right);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">int</span> indexOfRepeatChar = charIndexMap.get(c);</span><br><span class="line">                    left = Math.max(left, indexOfRepeatChar + <span class="number">1</span>);</span><br><span class="line">                    charIndexMap.put(c, right);</span><br><span class="line">                &#125;</span><br><span class="line">                maxLength = Math.max(maxLength, right - left + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> maxLength;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>代码如果看起来有困难的话，结合上面讲解一起食用更好哦！</p>
 
           
         
